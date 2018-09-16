@@ -1,26 +1,22 @@
 package com.domain;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
-//import javax.persistence.En;
-
-@Component
 public class MonitorProgressReq {
-    private String TaskType;
-    private String web_url;
-    private String yarn_id;
+
+    private String taskType;
+    private String webUrl;
+    private String yarnId;
     private Integer jobId;
 
     public String getTaskType() {
-        return TaskType;
+        return taskType;
     }
 
-    public String getWeb_url() {
-        return web_url;
+    public String getWebUrl() {
+        return webUrl;
     }
 
-    public String getYarn_id() {
-        return yarn_id;
+    public String getYarnId() {
+        return yarnId;
     }
 
     public Integer getJobId() {
@@ -28,15 +24,15 @@ public class MonitorProgressReq {
     }
 
     public void setTaskType(String taskType) {
-        TaskType = taskType;
+        this.taskType = taskType;
     }
 
-    public void setWeb_url(String web_url) {
-        this.web_url = web_url;
+    public void setWebUrl(String webUrl) {
+        this.webUrl = webUrl;
     }
 
-    public void setYarn_id(String yarn_id) {
-        this.yarn_id = yarn_id;
+    public void setYarnId(String yarnId) {
+        this.yarnId = yarnId;
     }
 
     public void setJobId(Integer jobId) {

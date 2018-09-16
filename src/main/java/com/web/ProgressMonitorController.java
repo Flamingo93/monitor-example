@@ -1,20 +1,20 @@
 package com.web;
 
 import com.domain.MonitorProgressReq;
-import com.service.RedisService;
-import com.service.TimerTask;
+import com.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.springframework.web.client.RestTemplate;
 import java.util.Timer;
-
 
 @Controller
 public class ProgressMonitorController {
 
     private final RedisService redisService;
+    private Timer timer = new Timer("Timer");
+    private RestTemplate restTemplate = new RestTemplate();
 
     @Autowired
     public ProgressMonitorController(RedisService redisService) {
@@ -22,17 +22,8 @@ public class ProgressMonitorController {
     }
 
     @RequestMapping("/")
-    public @ResponseBody void monitoring(MonitorProgressReq monitorProgressReq) {
-
-        try {
-            if (monitorProgressReq.getTaskType().equals("SPARK")) {
-                Timer timer;
-                timer = new Timer();
-                timer.schedule(new TimerTask(monitorProgressReq, redisService), 0, 2000);
-//                new TimerTask(monitorProgressReq, redisService).run();
-            }
-        }catch (Exception e){
-            System.out.println(e);
-        }
+    public @ResponseBody
+    void monitoring(MonitorProgressReq monitorProgressReq) {
+        timer.scheduleAtFixedRate(new MonitorTimerTask(monitorProgressReq, redisService, restTemplate), 0, 2000);
     }
 }

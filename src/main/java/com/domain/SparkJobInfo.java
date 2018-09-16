@@ -1,9 +1,7 @@
 package com.domain;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class SparkJobInfo {
+
     private int jobId;
     private String status;
     private float numTasks;
